@@ -39,7 +39,7 @@ def sentiment(text):
     # If their is more than one sentence then the first value is the document
     # sentiment therefore get rid of it.
     if len(sentiments) > 1:
-        sentiments_len  =- 1
+        sentiments_len  -= 1
         sentiments_iter = iter(sentiments)
         _               = next(sentiments_iter)
         for sentiment in sentiments_iter:
@@ -49,7 +49,7 @@ def sentiment(text):
 
     sentence_sent_err = ('The number of sentiments do not match the number of '
                          'sentences')
-    assert sentiments_len != len(sentiments), sentence_sent_err
+    assert sentiments_len == len(sentences), sentence_sent_err
 
     sentences_sentiment    = list(zip(sentences, sentiment_values))
     return sentences_sentiment
