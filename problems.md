@@ -43,3 +43,5 @@ https://dev.exploreyourdata.com/pricing.html
 http://www.sentaero.com/textsearch.php sentiment text search does not work
 unless it has 5 unique words as input and all sentences that are tested
 in the paper are 4 unique words long.
+
+For theysay going to need to use something other than robobrowser.
