@@ -43,5 +43,25 @@ https://dev.exploreyourdata.com/pricing.html
 http://www.sentaero.com/textsearch.php sentiment text search does not work
 unless it has 5 unique words as input and all sentences that are tested
 in the paper are 4 unique words long.
+LIWC -- cannot find a way to evaluate it I'm guessing they have removed the
+web front end that was orginally used.
+sentimentanalysisonline - requires a topic and comment therefore I do not
+know how to test this without having to sign up for a free API.
+http://demo2-opener.rhcloud.com/welcome.action does not appear to be working
+and nor does their ruby gem.
 
-For theysay going to need to use something other than robobrowser.
+## Websites that do not support multi sentences
+1. Repustate
+2. miopia
+3. text_processing
+
+## Dryscrape jobs
+1. theysay
+2. werfamous
+3. opinioncrawl - Very difficult the result is on an image and I can't find a
+ way of reading it yet so skipping it til last. Also they have an API.
+4. twitter.25trends.me - too difficult the sentiment is shown to you as a pie
+chart.
+5. umigon
+6. http://www.danielsoper.com/sentimentanalysis/# the sentiment is shown as a
+image therefore very difficult to collect the data.
