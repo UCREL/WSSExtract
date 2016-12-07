@@ -1,7 +1,6 @@
 import random
 import re
 import time
-import code
 
 from robobrowser import RoboBrowser
 
