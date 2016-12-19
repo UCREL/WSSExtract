@@ -1,5 +1,10 @@
 # The Web Sentence Sentiment Extractor
 
+## Install
+This has been tested on Python 3.5.2. Install the pips use the following command:
+pip3 install -r requirements.txt
+
+## General
 Using web scraping tools extracts sentiment values from different sentence/Twitter
 sentiment classifiers that are on the web.
 
