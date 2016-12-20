@@ -1,4 +1,6 @@
 from collections import OrderedDict
+import traceback
+
 import miopia
 import repustate
 import sentistrength
@@ -25,8 +27,9 @@ no_sentences = len(sentiment_sentences)
 sentiment_scores = {}
 if no_sentences:
     for sentiment_func in sentiment_funcs:
-        try:
-            for sentiment_sentence in sentiment_sentences:
+        for sentiment_sentence in sentiment_sentences:
+            try:
+
                 senti_score = getattr(sentiment_func, 'sentiment')(sentiment_sentence)
                 if len(senti_score) != 1:
                     to_many_sents_err = ('The {} classifier think this sentence'
@@ -48,9 +51,12 @@ if no_sentences:
                 else:
                     score_dict = OrderedDict([(senti_func_name, senti_score)])
                     sentiment_scores[sentiment_sentence] = score_dict
-        except Exception as e:
-            print(e)
-            continue
+            except Exception as e:
+                traceback_msg = traceback.extract_tb(e.__traceback__)
+                traceback_msg = ''.join(traceback.format_list(traceback_msg))
+                print("Error {} TRACEBACK {}".format(e, traceback_msg))
+                print("Sentence and classifier it occured on: {} {}".format(sentiment_sentence, sentiment_func.__name__))
+                continue
 
     print('Number of sentiment sentences to process {}'.format(no_sentences))
 
@@ -79,8 +85,7 @@ for sentiment_sentence in sentiment_sentences:
 
 result_file = 'results.tsv'
 with open(result_file, 'w') as fp:
-    senti_func_names = list(map(lambda func: func.__name__, sentiment_funcs))
-    senti_func_names.extend(chris_potts_clf)
+    senti_func_names = list(sentiment_scores[sentiment_sentences[0]].keys())
     senti_func_names.insert(0, '')
     top_line = '\t'.join(senti_func_names)
     fp.write(top_line + "\n")
