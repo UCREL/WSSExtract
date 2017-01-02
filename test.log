@@ -1,0 +1,69 @@
+INFO:root:Processing this sentence vending machine guy gave me free chips, what a nice guy with this classifier sisa
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): www.aiaioo.com
+DEBUG:requests.packages.urllib3.connectionpool:"GET /annotator-0.1/automation/demoView/1 HTTP/1.1" 200 None
+DEBUG:requests.packages.urllib3.connectionpool:"POST /annotator-0.1/automation/demo HTTP/1.1" 200 None
+INFO:root:Processing this sentence vending machine guy gave me free chips, what a nice guy!!! with this classifier sisa
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): www.aiaioo.com
+DEBUG:requests.packages.urllib3.connectionpool:"GET /annotator-0.1/automation/demoView/1 HTTP/1.1" 200 None
+DEBUG:requests.packages.urllib3.connectionpool:"POST /annotator-0.1/automation/demo HTTP/1.1" 200 None
+INFO:root:Processing this sentence vending machine guy gave me free chips, what a nice guy with this classifier sentistrength
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): sentistrength.wlv.ac.uk
+DEBUG:requests.packages.urllib3.connectionpool:"GET / HTTP/1.1" 200 15141
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: sentistrength.wlv.ac.uk
+DEBUG:requests.packages.urllib3.connectionpool:"GET /results.php?text=vending+machine+guy+gave+me+free+chips%2C+what+a+nice+guy&submit=Detect+Sentiment&result=binary HTTP/1.1" 200 2795
+INFO:root:Processing this sentence vending machine guy gave me free chips, what a nice guy!!! with this classifier sentistrength
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): sentistrength.wlv.ac.uk
+DEBUG:requests.packages.urllib3.connectionpool:"GET / HTTP/1.1" 200 15141
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: sentistrength.wlv.ac.uk
+DEBUG:requests.packages.urllib3.connectionpool:"GET /results.php?text=vending+machine+guy+gave+me+free+chips%2C+what+a+nice+guy%21%21%21&submit=Detect+Sentiment&result=binary HTTP/1.1" 200 2817
+INFO:root:Processing this sentence vending machine guy gave me free chips, what a nice guy with this classifier miopia
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): miopia.grupolys.org
+DEBUG:requests.packages.urllib3.connectionpool:"POST /api/v1.0/polarity/en/supervised/ HTTP/1.1" 200 None
+INFO:root:Processing this sentence vending machine guy gave me free chips, what a nice guy!!! with this classifier miopia
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): miopia.grupolys.org
+DEBUG:requests.packages.urllib3.connectionpool:"POST /api/v1.0/polarity/en/supervised/ HTTP/1.1" 200 None
+INFO:root:Processing this sentence vending machine guy gave me free chips, what a nice guy with this classifier repustate
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): www.repustate.com
+DEBUG:requests.packages.urllib3.connectionpool:"GET /api-demo/ HTTP/1.1" 200 4338
+DEBUG:requests.packages.urllib3.connectionpool:"POST /api-demo/ HTTP/1.1" 200 4483
+INFO:root:Processing this sentence vending machine guy gave me free chips, what a nice guy!!! with this classifier repustate
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): www.repustate.com
+DEBUG:requests.packages.urllib3.connectionpool:"GET /api-demo/ HTTP/1.1" 200 4340
+DEBUG:requests.packages.urllib3.connectionpool:"POST /api-demo/ HTTP/1.1" 200 4488
+INFO:root:Processing this sentence vending machine guy gave me free chips, what a nice guy with this classifier text_analysis_online
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): textanalysisonline.com
+DEBUG:requests.packages.urllib3.connectionpool:"GET /pattern-sentiment-analysis HTTP/1.1" 200 None
+DEBUG:requests.packages.urllib3.connectionpool:"POST /pattern-sentiment-analysis HTTP/1.1" 200 None
+INFO:root:Processing this sentence vending machine guy gave me free chips, what a nice guy!!! with this classifier text_analysis_online
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): textanalysisonline.com
+DEBUG:requests.packages.urllib3.connectionpool:"GET /pattern-sentiment-analysis HTTP/1.1" 200 None
+DEBUG:requests.packages.urllib3.connectionpool:"POST /pattern-sentiment-analysis HTTP/1.1" 200 None
+INFO:root:Processing this sentence vending machine guy gave me free chips, what a nice guy with this classifier text_processing
+INFO:root:Processing this sentence vending machine guy gave me free chips, what a nice guy!!! with this classifier text_processing
+INFO:root:Processing this sentence vending machine guy gave me free chips, what a nice guy with this classifier text2data
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): text2data.org
+DEBUG:requests.packages.urllib3.connectionpool:"GET /Demo HTTP/1.1" 200 5772
+DEBUG:requests.packages.urllib3.connectionpool:"POST /Demo/Demo HTTP/1.1" 200 5730
+INFO:root:Processing this sentence vending machine guy gave me free chips, what a nice guy!!! with this classifier text2data
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): text2data.org
+DEBUG:requests.packages.urllib3.connectionpool:"GET /Demo HTTP/1.1" 200 5859
+DEBUG:requests.packages.urllib3.connectionpool:"POST /Demo/Demo HTTP/1.1" 200 5737
+INFO:root:Processing this sentence vending machine guy gave me free chips, what a nice guy with this classifier werfamous_twitter
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): werfamous.com
+DEBUG:requests.packages.urllib3.connectionpool:"GET / HTTP/1.1" 200 None
+DEBUG:requests.packages.urllib3.connectionpool:"POST / HTTP/1.1" 302 None
+DEBUG:requests.packages.urllib3.connectionpool:"GET /query?job=db7e9a3f-b0be-41ed-bf37-e707dd3f8b66&search=vending%20machine%20guy%20gave%20me%20free%20chips,%20what%20a%20nice%20guy&lang=en HTTP/1.1" 200 None
+INFO:root:Processing this sentence vending machine guy gave me free chips, what a nice guy!!! with this classifier werfamous_twitter
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): werfamous.com
+DEBUG:requests.packages.urllib3.connectionpool:"GET / HTTP/1.1" 200 None
+DEBUG:requests.packages.urllib3.connectionpool:"POST / HTTP/1.1" 302 None
+DEBUG:requests.packages.urllib3.connectionpool:"GET /query?job=3bcebfb3-35a7-4209-b23a-2037fb60774c&search=vending%20machine%20guy%20gave%20me%20free%20chips,%20what%20a%20nice%20guy!!!&lang=en HTTP/1.1" 200 None
+INFO:root:Number of sentiment sentences to process 2
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): sentiment.christopherpotts.net
+DEBUG:requests.packages.urllib3.connectionpool:"GET /lexicon/textscores_results/ HTTP/1.1" 200 1564
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: sentiment.christopherpotts.net
+DEBUG:requests.packages.urllib3.connectionpool:"POST /lexicon/textscores_results/ HTTP/1.1" 200 3708
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): sentiment.christopherpotts.net
+DEBUG:requests.packages.urllib3.connectionpool:"GET /lexicon/textscores_results/ HTTP/1.1" 200 1566
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: sentiment.christopherpotts.net
+DEBUG:requests.packages.urllib3.connectionpool:"POST /lexicon/textscores_results/ HTTP/1.1" 200 3857
