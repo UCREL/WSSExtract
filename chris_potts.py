@@ -33,7 +33,7 @@ def sentiment(text):
 
     action = '/lexicon/textscores_results/'
 
-    browser = RoboBrowser()
+    browser = RoboBrowser(parser='html.parser')
     browser.open(__url__)
 
     time.sleep(random.randint(10,25))

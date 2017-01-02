@@ -20,7 +20,7 @@ def sentiment(text):
 
     global __url__
 
-    browser = RoboBrowser()
+    browser = RoboBrowser(parser='html.parser')
     browser.open(__url__)
 
     time.sleep(random.randint(10,25))

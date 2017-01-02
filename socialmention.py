@@ -33,7 +33,7 @@ def sentiment(text):
     global __url__
 
     action = '/search'
-    browser = RoboBrowser()
+    browser = RoboBrowser(parser='html.parser')
     browser.open(__url__)
 
     form = browser.get_form(action=action)
