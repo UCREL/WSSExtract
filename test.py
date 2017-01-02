@@ -1,5 +1,6 @@
 from collections import OrderedDict
 import traceback
+import logging
 
 import miopia
 import repustate
@@ -13,9 +14,10 @@ import tweenator
 import werfamous_twitter
 import chris_potts
 
-sentiment_funcs = [sisa, sentistrength, miopia, repustate,
-                   text_analysis_online, text_processing, text2data,
-                   textsentiment, tweenator, werfamous_twitter]
+sentiment_funcs = [sisa, sentistrength, miopia, repustate, text_analysis_online,
+                   text_processing, text2data, werfamous_twitter]
+
+logging.basicConfig(filename='test.log',level=logging.DEBUG)
 
 input_file = 'input.txt'
 sentiment_sentences = []
@@ -29,7 +31,7 @@ if no_sentences:
     for sentiment_func in sentiment_funcs:
         for sentiment_sentence in sentiment_sentences:
             try:
-
+                logging.info('Processing this sentence {} with this classifier {}'.format(sentiment_sentence, sentiment_func.__name__))
                 senti_score = getattr(sentiment_func, 'sentiment')(sentiment_sentence)
                 if len(senti_score) != 1:
                     to_many_sents_err = ('The {} classifier think this sentence'
@@ -47,21 +49,21 @@ if no_sentences:
                         sentence_scores[senti_func_name] = senti_score
 
                     else:
-                        print('{} classifier is being applied to the sentence twice'.format(senti_func_name))
+                        logging.error('{} classifier is being applied to the sentence twice'.format(senti_func_name))
                 else:
                     score_dict = OrderedDict([(senti_func_name, senti_score)])
                     sentiment_scores[sentiment_sentence] = score_dict
             except Exception as e:
                 traceback_msg = traceback.extract_tb(e.__traceback__)
                 traceback_msg = ''.join(traceback.format_list(traceback_msg))
-                print("Error {} TRACEBACK {}".format(e, traceback_msg))
-                print("Sentence and classifier it occured on: {} {}".format(sentiment_sentence, sentiment_func.__name__))
+                logging.error("Error {} TRACEBACK {}".format(e, traceback_msg))
+                logging.error("Sentence and classifier it occured on: {} {}".format(sentiment_sentence, sentiment_func.__name__))
                 continue
 
-    print('Number of sentiment sentences to process {}'.format(no_sentences))
+    logging.info('Number of sentiment sentences to process {}'.format(no_sentences))
 
 else:
-    print('No sentiment sentences to process')
+    logging.warning('No sentiment sentences to process')
 
 chris_potts_clf = []
 for sentiment_sentence in sentiment_sentences:
@@ -77,7 +79,7 @@ for sentiment_sentence in sentiment_sentences:
                 sentence_scores[senti_clf] = senti_score
 
             else:
-                print('{} classifier is being applied to the sentence twice'.format(senti_func_name))
+                logging.error('{} classifier is being applied to the sentence twice'.format(senti_func_name))
         else:
             score_dict = OrderedDict([(senti_clf, senti_score)])
             sentiment_scores[sentiment_sentence] = score_dict
@@ -92,6 +94,12 @@ with open(result_file, 'w') as fp:
     for sentence, func_score in sentiment_scores.items():
         sentence = sentence.replace('\t', '')
         fp.write(sentence + "\t")
+        num_funcs = len(func_score)
+        count = 0
         for func, score in func_score.items():
-            fp.write(score + "\t")
-        fp.write("\n")
+            count += 1
+            # Handle end of lines
+            if count == num_funcs:
+                fp.write(score + "\n")
+            else:
+                fp.write(score + "\t")
