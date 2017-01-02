@@ -24,7 +24,7 @@ def sentiment(text):
     global __url__
 
     action = '/Demo/Demo'
-    browser = RoboBrowser()
+    browser = RoboBrowser(parser='html.parser')
     browser.open(__url__)
 
     time.sleep(random.randint(10,25))
@@ -35,11 +35,13 @@ def sentiment(text):
     browser.submit_form(form)
 
     sentiment_table = browser.select('#divResults')[0]
-    sentiment_value = re.findall('This document is:[^\)]*',str(sentiment_table))[0]
-    sentiment_value = float(sentiment_value.split('(')[1])
-    # Make it conform to the other return statements of a list of tuples
-    # containing sentence, sentiment value of that sentence.
-    sentiment_values    = [sentiment_value]
-    sentences           = [text]
-    sentences_sentiment = list(zip(sentences, sentiment_values))
-    return sentences_sentiment
+    sentiment_value = sentiment_table.find_all('font')
+    if len(sentiment_value) == 1:
+        sentiment_value = sentiment_value[0].string
+        sentiment_value = float(sentiment_value.split('(')[1].rstrip(')'))
+        # Make it conform to the other return statements of a list of tuples
+        # containing sentence, sentiment value of that sentence.
+        sentiment_values    = [sentiment_value]
+        sentences           = [text]
+        sentences_sentiment = list(zip(sentences, sentiment_values))
+        return sentences_sentiment
