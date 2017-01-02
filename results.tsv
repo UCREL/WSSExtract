@@ -1,3 +1,3 @@
-	sisa	sentistrength	sentiwordnet	imdb	wordnet	opinionlexicon	mpqa
-This phone is amazing!!!	positive	1	-0.375	0.3232574926556601	0.0	1.0	2.0	
-This phone is amazing	positive	1	-0.375	0.25105269492326004	0.0	1.0	2.0	
+	sisa	sentistrength	miopia	repustate	text_analysis_online	text_processing	text2data	werfamous_twitter	sentiwordnet	opinionlexicon	wordnet	mpqa	imdb
+vending machine guy gave me free chips, what a nice guy	positive	1	positive	0.95	0.5	pos	0.726	0.0	0.0	1.0	6.95328	1.0	-0.09807334413412003
+vending machine guy gave me free chips, what a nice guy!!!	positive	1	positive	0.95	0.7	pos	0.73	0.0	0.0	1.0	6.95328	1.0	-0.025868546401720035
