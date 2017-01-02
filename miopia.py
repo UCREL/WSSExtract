@@ -2,8 +2,7 @@ import json
 import time
 import code
 
-import urllib.parse
-import urllib.request
+import requests
 
 '''Finds the sentiment of sentences using the sentiment analysis tool found
  here: https://miopia.grupolys.org/demo/'''
@@ -31,17 +30,11 @@ def sentiment(text, token=None):
     else:
         time.sleep(61)
     values = {'text': text}
-    data = urllib.parse.urlencode(values)
-    data = data.encode('utf-8')
-    req = urllib.request.Request(__url__, data)
-    sentiment = False
-
-    with urllib.request.urlopen(req) as response:
-        sentiment = response.read()
-        sentiment = sentiment.decode('utf-8')
-        sentiment = json.loads(sentiment)
+    req = requests.post(__url__, data=values, verify=False)
+    req.raise_for_status()
+    sentiment = req.json()
+    if 'polarity' in sentiment:
         sentiment = sentiment['polarity']
-    if sentiment:
-        return [(text, sentiment)]
-    else:
-        raise(Exception('Could not get a sentiment value'))
+        if sentiment:
+            return [(text, sentiment)]
+    raise(Exception('Could not get a sentiment value'))
