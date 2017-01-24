@@ -1,3 +1,9 @@
-	sisa	sentistrength	miopia	repustate	text_analysis_online	text_processing	text2data	werfamous_twitter	sentiwordnet	opinionlexicon	wordnet	mpqa	imdb
-vending machine guy gave me free chips, what a nice guy	positive	1	positive	0.95	0.5	pos	0.726	0.0	0.0	1.0	6.95328	1.0	-0.09807334413412003
-vending machine guy gave me free chips, what a nice guy!!!	positive	1	positive	0.95	0.7	pos	0.73	0.0	0.0	1.0	6.95328	1.0	-0.025868546401720035
+	sisa	sentistrength	miopia	repustate	text_analysis_online	text_processing	text2data	werfamous_twitter	wordnet	mpqa	opinionlexicon	imdb	sentiwordnet
+VENDING MACHINE GUY GAVE ME FREE CHIPS, WHAT A NICE GUY	positive	1	positive	0.95	0.5	pos	0.728	0.0	6.95328	1.0	1.0	-0.09807334413412003	0.0
+vending machine guy gave me free chips, what a NICE guy	positive	1	positive	0.95	0.5	pos	-0.25	0.0	6.95328	1.0	1.0	-0.09807334413412003	0.0
+vending machine guy gave me free chips, what a niiiiiiice guy	positive	1	neutral	0.95	0.4	neg	-0.25	0.0	6.95328	1.0	1.0	-0.09807334413412003	0.0
+vending machine guy gave me free chips, what a nice guy :-(	positive	1	negative	0.424934327788	0.083333	pos	0.782	0.0	6.95328	1.0	1.0	-0.24193715467912003	0.0
+vending machine guy gave me free chips, what a nice guy	positive	1	positive	0.95	0.5	pos	0.726	0.0	6.95328	1.0	1.0	-0.09807334413412003	0.0
+vending machine guy gave me free chips, what a nice guy!!!	positive	1	positive	0.95	0.7	pos	0.73	0.0	6.95328	1.0	1.0	-0.025868546401720035	0.0
+vending machine guy gave me free chips, what a nice guy!!!!!!	positive	1	positive	0.95	0.7	pos	0.734	0.0	6.95328	1.0	1.0	0.046336251330679964	0.0
+vending machine guy gave me free chips, what a nice guy :-)	positive	1	positive	0.95	0.5	pos	0.891	0.0	6.95328	1.0	1.0	0.04803956481187996	0.0
