@@ -48,11 +48,14 @@ def sentiment(text):
         div_area = browser.select('#'+str(clf))
         assert len(div_area) == 1, 'has to be only one div area per clf'
         div_area = str(div_area[0])
-        data_rows = re.findall('data.addRow\([^\)]*', div_area)
+        data_rows = re.findall('data.addRow.*(?=]\);)', div_area)
         overall_score = float(0)
         for row in data_rows:
             row = re.findall('\[[^\]]*', row)[0]
             row = re.findall('"[^"]*', row)
+            if len(row) != 2:
+                import code
+                code.interact(local=locals())
             assert len(row) == 2, 'Row has to be of length two to remove the word'
             row = row[1]
             row = row.replace('"', '')
