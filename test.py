@@ -96,10 +96,14 @@ with open(result_file, 'w') as fp:
         fp.write(sentence + "\t")
         num_funcs = len(func_score)
         count = 0
+        import code
+        code.interact(local=locals())
         for func, score in func_score.items():
             count += 1
             # Handle end of lines
             if count == num_funcs:
+                import code
+                code.interact(local=locals())
                 fp.write(score + "\n")
             else:
                 fp.write(score + "\t")
