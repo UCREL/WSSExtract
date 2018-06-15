@@ -30,7 +30,7 @@ class ChrisPotts(SentimentAPI):
     address and process the returning value to return a sentiment value.
     '''
 
-    def __init__(self, senti_clf):
+    def __init__(self, senti_clf) -> None:
         '''
         :param senti_clf: One of the following Strings that represents a \
         different sentiment classifier/system: 1. 'wordnet', \
