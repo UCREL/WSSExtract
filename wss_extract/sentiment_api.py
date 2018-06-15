@@ -7,13 +7,14 @@ from abc import ABC, abstractmethod
 import time
 from typing import Tuple, Any, Union, Dict
 import random
+from urllib.error import URLError
 
 from robobrowser import RoboBrowser
 from reppy.cache import AgentCache
 from reppy.cache.policy import ReraiseExceptionPolicy
 from reppy.exceptions import BadStatusCode
 
-from errors import RobotsError
+from wss_extract.errors import RobotsError
 
 
 class SentimentAPI(ABC):
@@ -53,8 +54,11 @@ class SentimentAPI(ABC):
         if not self.allowed:
             raise RobotsError(self.url)
 
-        browser = RoboBrowser(parser='html.parser')
+        browser = RoboBrowser(parser='html.parser', timeout=40)
         browser.open(self.url)
+        status_code = browser.response.status_code
+        if status_code >= 400:
+            raise URLError(f'Bad web page. Status code {status_code}')
 
         time.sleep(random.randint(*self.timeout))
         value = self._process_sentiment_page(browser=browser, text=text)

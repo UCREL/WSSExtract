@@ -68,7 +68,7 @@ class ChrisPotts(SentimentAPI):
         assert_msg = 'The text has to contain less than '\
                      f'140 chars contains {text_length}'
         assert text_length < 140, assert_msg
-        return super().__init__(text, sentiment_mapper)
+        return super().sentiment(text, sentiment_mapper)
 
     def _process_sentiment_page(self, browser, text) -> float:
         '''
