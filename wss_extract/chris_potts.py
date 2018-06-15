@@ -6,7 +6,7 @@ Module contains the following class:
 from typing import Dict, Any, Union
 import re
 
-from sentiment_api import SentimentAPI
+from wss_extract.sentiment_api import SentimentAPI
 
 
 class ChrisPotts(SentimentAPI):

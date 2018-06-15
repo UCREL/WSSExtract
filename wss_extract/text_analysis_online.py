@@ -5,7 +5,7 @@ Module contains the following class:
 '''
 import re
 
-from sentiment_api import SentimentAPI
+from wss_extract.sentiment_api import SentimentAPI
 
 
 class TextAnalysisOnline(SentimentAPI):

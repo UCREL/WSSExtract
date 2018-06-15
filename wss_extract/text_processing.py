@@ -10,7 +10,7 @@ import random
 import urllib.parse
 import urllib.request
 
-from sentiment_api import SentimentAPI
+from wss_extract.sentiment_api import SentimentAPI
 
 
 class TextProcessing(SentimentAPI):
