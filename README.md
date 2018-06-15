@@ -1,34 +1,29 @@
-# The Web Sentence Sentiment Extractor
+# The Web Sentence Sentiment Extractor (WSSExtract)
 
-## Install
-This has been tested on Python 3.5.2. Install the pips use the following command:
-pip3 install -r requirements.txt
+## Install and requirements:
+1. Python 3.6
+2. pip install .
 
 ## General
-Using web scraping tools extracts sentiment values from different sentence/Twitter
-sentiment classifiers that are on the web.
+Contains 4 working sentiment systems that all have a common API.
 
-This repository contains 11 different scraping scripts of which each one
-is a Python module that contains the function sentiment. The sentiment function
-when called will return a list of tuple(s) where the first value in the tuple
-is the text being classified and the second value is the sentiment value
-associated to that text e.g.
-[('some text', 'Positive')]
-Note that each classifier can output a different sentiment value e.g. 1, 'Pos'
-etc therefore below you will see a list of outputs for each script.
+## Example
 
-**ALSO NOTE** that the [Christopher Potts](chris_potts.py) script is slightly different
-and contains 5 sentiment classifiers in one therefore its sentiment function
-output is slightly different.
+See the following Jupyter notebook for an [example](./notebooks/example.ipynb)
 
 ## DISCLAIMER
 Please respect the terms and conditions of each sentiment tools that is being
 scraped I nor any contributor to this project take any liability for the way
 this tool is used. Hence why there are timeouts in each script by default.
 
-## Sentiment value outputs
-1. [miopia](miopia.py) values: 'positive', 'neutral', 'negative'.
-2. [Christopher Potts](chris_potts.py) values for each of the sentence classifiers
-that are on his website are calculated like so: Each word has a sentiment value
-e.g. 0.5, 1, -1, -0.6 and as the sentence is made up of normally many words each
-sentiment values associated to each word in the sentence is summed.
+### Text Processing
+This has an explicit rate limit of 1000 calls per day see [here](http://text-processing.com/docs/index.html) for details. We have added timeouts to the calls but this is not enough to stop you from going over the rate limit. Therefore it is upon the users of this project to respect these rate limits.
+
+## Sentiment value outputs for working APIs
+1. [Repustate](./wss_extract/repustate.py). Real value between -1 and 1
+2. [SentiStrength](./wss_extract/sentistrength.py). Binary value either -1 or 1.
+3. [Text Analysis Online](./wss_extract/text_analysis_online.py). Real value between -1 and 1
+4. [Text Processing](./wss_extract/text_processing.py). One of the following Strings: `pos`, `neg` or `neutral`
+
+## Sentiment systems that do not work
+1. [Christopher Potts](./wss_extract/chris_potts.py) - Contains 5 different sentiment systems
