@@ -1,51 +1,82 @@
+'''
+Module contains the following class:
+
+1. :py:class:`TextProcessing`
+'''
 import json
 import time
-
+from typing import Dict, Any, Union
+import random
 import urllib.parse
 import urllib.request
 
-'''Finds the sentiment of sentences using the sentiment analysis tool found
- here: http://text-processing.com/demo/sentiment/'''
+from sentiment_api import SentimentAPI
 
-__url__ = 'http://text-processing.com/api/sentiment/'
 
-def sentiment(text, token=None):
-    '''Given a string of text will return a list of tuples each containing:
-    1) String that reprsents a sentence from the text.
-    2) The sentiment value of the associated sentence
-    Note if one sentence given the length of the list will be 1.
+class TextProcessing(SentimentAPI):
+    '''
+    Concrete class of the abstract class :py:class:`SentimentAPI`.
 
-    This system can only analyse text as one sentences does not split
-    the text into sentences.
-    Reference:
-    https://docs.python.org/3.5/howto/urllib2.html
+    Attributes:
 
-    Added timeouts due to the API rate limitations found here (1000 calls ]
-    per day per IP address):
-    http://text-processing.com/docs/index.html
+    1. url -- url address of the Text Processing sentiment api demo \
+    `form <http://text-processing.com/demo/sentiment/>`_
+    2. timeout -- the number of seconds to randomly wait until the next \
+    request to the server.
+
+    Functions:
+
+    1. sentiment -- Finds the sentiment of a text by using the sentiment \
+    system at the following `URL <http://text-processing.com/demo/sentiment/>`_
     '''
 
-    global __url__
-    time.sleep(2.05)
+    @property
+    def url(self):
+        return 'http://text-processing.com/api/sentiment/'
 
-    values = {'text': text}
-    data = urllib.parse.urlencode(values)
-    data = data.encode('utf-8')
-    req = urllib.request.Request(__url__, data)
-    sentiment = False
+    @property
+    def timeout(self):
+        return (10, 25)
 
-    with urllib.request.urlopen(req) as response:
-        sentiment = response.read()
-        sentiment = sentiment.decode('utf-8')
-        sentiment = json.loads(sentiment)
-        sentiment_label = sentiment['label']
-        # More fine grained results
-        sentiment_results = sentiment['probability']
-        pos_prob = sentiment_results['pos']
-        neu_prob = sentiment_results['neutral']
-        neg_prob = sentiment_results['neg']
+    def sentiment(self, text: str,
+                  sentiment_mapper: Union[None, Dict] = None) -> Any:
+        '''
+        :param text: The text to input into the sentiment system/ web form
+        :param sentiment_mapper: Optional default None. If not None it is \
+        a dict that maps the sentiment values that come from the system into \
+        a different value e.g. if the system output 1 and -1 a mapper could \
+        be {1: 'pos', -1: 'neg'}
+        :returns: One of the following Strings: 'pos', 'neg', 'neutral'
+        '''
 
-    if sentiment_label:
-        return [(text, sentiment_label)]
-    else:
-        raise(Exception('Could not get a sentiment value'))
+        time.sleep(random.randint(*self.timeout))
+        values = {'text': text}
+        data = urllib.parse.urlencode(values)
+        data = data.encode('utf-8')
+        req = urllib.request.Request(self.url, data)
+        sentiment = False
+
+        with urllib.request.urlopen(req) as response:
+            sentiment = response.read()
+            sentiment = sentiment.decode('utf-8')
+            sentiment = json.loads(sentiment)
+            sentiment_label = sentiment['label']
+            # More fine grained results
+            # sentiment_results = sentiment['probability']
+            # pos_prob = sentiment_results['pos']
+            # neu_prob = sentiment_results['neutral']
+            # neg_prob = sentiment_results['neg']
+
+        if sentiment_label:
+            if sentiment_mapper is not None:
+                return sentiment_mapper[sentiment_label]
+            return sentiment_label
+        else:
+            raise ValueError('Could not get a sentiment value from Text '
+                             'Processing')
+
+    def _process_sentiment_page(self, browser, text):
+        '''
+        Not required for this class
+        '''
+        pass

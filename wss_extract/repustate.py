@@ -1,39 +1,53 @@
-import random
+'''
+Module contains the following class:
+
+1. :py:class:`Repustate`
+'''
 import re
-import time
 
-from robobrowser import RoboBrowser
+from sentiment_api import SentimentAPI
 
-'''Finds the sentiment of sentences using the sentiment analysis tool found
- here: https://www.repustate.com/api-demo/'''
 
-__url__ = 'https://www.repustate.com/api-demo/'
+class Repustate(SentimentAPI):
+    '''
+    Concrete class of the abstract class :py:class:`SentimentAPI`.
 
-def sentiment(text):
-    '''Given a string of text will return a list of tuples each containing:
-    1) String that reprsents a sentence from the text.
-    2) The sentiment value of the associated sentence
-    Note if one sentence given the length of the list will be 1.'''
+    Attributes:
 
-    global __url__
+    1. url -- url address of the Repustate sentiment api demo \
+    `form <https://www.repustate.com/sentiment-analysis-demo/>`_
+    2. timeout -- the number of seconds to randomly wait until the next \
+    request to the server.
 
-    class_ = 'form'
-    browser = RoboBrowser(parser='html.parser')
-    browser.open(__url__)
+    Functions:
 
-    time.sleep(random.randint(10,25))
+    1. _process_sentiment_page -- Fills out and submits the form at the url \
+    address and process the returning value to return a sentiment value.
+    '''
 
-    form =  browser.get_form(class_=class_)
-    form['text'].value = text
-    form['language'].value = 'en'
-    browser.session.headers['Referer'] = __url__
-    browser.submit_form(form)
+    @property
+    def url(self):
+        return 'https://www.repustate.com/sentiment-analysis-demo/'
 
-    sentiment_table = browser.select('form')[0].select('table')[0]
-    sentiment_value = re.findall('[\d.]+<',str(sentiment_table))[0].rstrip('<')
-    # Make it conform to the other return statements of a list of tuples
-    # containing sentence, sentiment value of that sentence.
-    sentiment_values    = [sentiment_value]
-    sentences           = [text]
-    sentences_sentiment = list(zip(sentences, sentiment_values))
-    return sentences_sentiment
+    @property
+    def timeout(self):
+        return (10, 25)
+
+    def _process_sentiment_page(self, browser, text) -> float:
+        '''
+        :param browser: A :py:class:`robobrowser.browser.RoboBrowser` \
+        instance which is at the webpage that has the form to access the \
+        sentiment system
+        :param text: The text to input into the sentiment system/ web form
+        :returns: A real valued sentiment score between -1 and 1
+        '''
+        form = browser.get_form(class_='form')
+        form['text'].value = text
+        form['language'].value = 'en'
+        browser.session.headers['Referer'] = self.url
+        browser.submit_form(form)
+
+        sentiment_table = browser.select('form')[0].select('table')[0]
+        sentiment_value = re.findall('[\d.]+<', str(sentiment_table))[0]
+        sentiment_value = float(sentiment_value.rstrip('<'))
+        return sentiment_value

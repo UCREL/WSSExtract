@@ -1,41 +1,58 @@
-import random
+'''
+Module contains the following class:
+
+1. :py:class:`TextAnalysisOnline`
+'''
 import re
-import time
 
-from robobrowser import RoboBrowser
+from sentiment_api import SentimentAPI
 
-'''Finds the sentiment of sentences using the sentiment analysis tool found
- here: http://textanalysisonline.com/pattern-sentiment-analysis'''
 
-__url__ = 'http://textanalysisonline.com/pattern-sentiment-analysis'
+class TextAnalysisOnline(SentimentAPI):
+    '''
+    Concrete class of the abstract class :py:class:`SentimentAPI`.
 
-def sentiment(text):
-    '''Given a string of text will return a list of tuples each containing:
-    1) String that reprsents a sentence from the text.
-    2) The sentiment value of the associated sentence
-    Note if one sentence given the length of the list will be 1.
+    Respect the API Rate limit of 1000 calls per day see \
+    `here <http://text-processing.com/docs/index.html>`_ for details
 
-    This system can only analyse text as one sentences does not split
-    the text into sentences.'''
+    Attributes:
 
-    global __url__
+    1. url -- url address of the Text Analysis Online sentiment api demo \
+    `form <http://textanalysisonline.com/pattern-sentiment-analysis>`_
+    2. timeout -- the number of seconds to randomly wait until the next \
+    request to the server.
 
-    browser = RoboBrowser(parser='html.parser')
-    browser.open(__url__)
+    Functions:
 
-    time.sleep(random.randint(10,25))
+    1. _process_sentiment_page -- Fills out and submits the form at the url \
+    address and process the returning value to return a sentiment value.
+    '''
 
-    form =  browser.get_forms()[0]
-    form['text'].value = text
-    browser.submit_form(form)
+    @property
+    def url(self):
+        return 'http://textanalysisonline.com/pattern-sentiment-analysis'
 
-    all_text = browser.select('html')[0]
-    sentiment_value = re.findall('<h4>Analysis Result[\w\W]*?(?=</p>)',str(all_text))[0]
-    sentiment_value = re.findall('Polarity = [\d\.-]*',str(sentiment_value))[0]
-    sentiment_value = float(re.findall('[\d\.-]+',str(sentiment_value))[0])
-    # Make it conform to the other return statements of a list of tuples
-    # containing sentence, sentiment value of that sentence.
-    sentiment_values    = [sentiment_value]
-    sentences           = [text]
-    sentences_sentiment = list(zip(sentences, sentiment_values))
-    return sentences_sentiment
+    @property
+    def timeout(self):
+        return (10, 25)
+
+    def _process_sentiment_page(self, browser, text) -> float:
+        '''
+        :param browser: A :py:class:`robobrowser.browser.RoboBrowser` \
+        instance which is at the webpage that has the form to access the \
+        sentiment system
+        :param text: The text to input into the sentiment system/ web form
+        :returns: A real valued sentiment score between -1 and 1
+        '''
+        form = browser.get_forms()[0]
+        form['text'].value = text
+        browser.submit_form(form)
+
+        all_text = browser.select('html')[0]
+        sentiment_value = re.findall('<h4>Analysis Result[\w\W]*?(?=</p>)',
+                                     str(all_text))[0]
+        sentiment_value = re.findall('Polarity = [\d\.-]*',
+                                     str(sentiment_value))[0]
+        sentiment_value = float(re.findall('[\d\.-]+',
+                                str(sentiment_value))[0])
+        return sentiment_value
