@@ -1,8 +1,9 @@
 # The Web Sentence Sentiment Extractor (WSSExtract)
 
 ## Install and requirements:
-1. Python 3.6
-2. pip install .
+run the following (requires Python >= 3.6):
+
+`pip install .`
 
 ## General
 Contains 4 working sentiment systems that all have a common API.
