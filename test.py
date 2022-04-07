@@ -20,11 +20,10 @@ def test_apis():
     2. Test that for a system that is known not to work that it \
     raises an error.
     '''
-    working_classes = ['Repustate', 'SentiStrength',
-                       'TextAnalysisOnline', 'TextProcessing']
-    correct_sentiments = [0.975, 1, 0.7, 'pos']
+    working_classes = ['SentiStrength', 'TextAnalysisOnline', 'TextProcessing']
+    correct_sentiments = [1, 0.7, 'pos']
     pred_sentiments = []
-    with Pool(4) as pool:
+    with Pool(2) as pool:
         pred_sentiments = pool.map(get_sentiment, working_classes)
     for index, correct_sentiment in enumerate(correct_sentiments):
         pred_sentiment = pred_sentiments[index]
@@ -38,17 +37,20 @@ def test_apis():
         not_working_api = not_working_api(*not_working_init_attr)
         with pytest.raises(URLError):
             not_working_api.sentiment('It was a good film')
+    
+    with pytest.raises(URLError):
+        get_sentiment('Repustate')
 
 
 def test_robot_error():
     '''
-    Test that the :py:func:`wss_extract.sentiment_api.allowed` works \
+    Test that the :py:func:`wss_extract.sentiment_api.allowed` works
     correctly under the following tests:
     1. robots.txt file that allows web scrapers
     2. robots.txt file that does not allow web scrapers
     '''
 
-    working_api = wss_extract.Repustate()
+    working_api = wss_extract.SentiStrength()
     assert working_api.allowed
 
     assert not BadRobotsAPI().allowed

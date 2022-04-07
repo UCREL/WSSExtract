@@ -23,8 +23,16 @@ This has an explicit rate limit of 1000 calls per day see [here](http://text-pro
 ## Sentiment value outputs for working APIs
 1. [Repustate](./wss_extract/repustate.py). Real value between -1 and 1
 2. [SentiStrength](./wss_extract/sentistrength.py). Binary value either -1 or 1.
-3. [Text Analysis Online](./wss_extract/text_analysis_online.py). Real value between -1 and 1
-4. [Text Processing](./wss_extract/text_processing.py). One of the following Strings: `pos`, `neg` or `neutral`
+3. [Text Processing](./wss_extract/text_processing.py). One of the following Strings: `pos`, `neg` or `neutral`
 
 ## Sentiment systems that do not work
 1. [Christopher Potts](./wss_extract/chris_potts.py) - Contains 5 different sentiment systems
+2. [Text Analysis Online](./wss_extract/text_analysis_online.py). Real value between -1 and 1
+
+## Tests
+
+To run the tests:
+
+```
+pytest test.py
+```
